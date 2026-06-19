@@ -2,7 +2,7 @@
 
 Este es el desarrollo de un sitio web enfocado en el nicho de indumentaria urbana y drops de ropa hype, realizado como parte de las actividades prácticas de la facultad.
 
----
+--- ## link de la pagina: https://rorod223.github.io/proyecto-e-commerce/
 
 ## 👤 Datos del Autor
 
