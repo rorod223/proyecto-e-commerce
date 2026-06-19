@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FRGHT CO. — Streetwear de drops limitados</title>
+<meta name="description" content="Tienda online de ropa hype/streetwear. Catálogo, registro de usuarios y carrito de compras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS — paleta, tipografía, layout
+     Inspirado en una "guía de despacho / manifiesto de carga":
+     fondo de hormigón oscuro + fichas de papel tipo etiqueta
+     colgante + acentos de cinta de advertencia.
+  ========================================================= */
+  :root{
+    --bg:#14151a;
+    --bg-soft:#1b1c23;
+    --bg-soft-2:#20212a;
+    --line: rgba(236,231,221,0.14);
+    --paper:#ece7dd;
+    --paper-shadow:#d9d2c0;
+    --ink:#19181a;
+    --ink-soft:#43424a;
+    --accent:#ff5a1f;
+    --accent-deep:#c8430f;
+    --stamp:#c81e2c;
+    --ok:#3fae6a;
+    --text:#ece7dd;
+    --text-dim:#9a9ca8;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --radius: 3px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ font-family:var(--font-display); letter-spacing:.02em; line-height:1.05; margin:0; text-transform:uppercase; }
+  p{ margin:0; }
+  button{ font-family:inherit; cursor:pointer; }
+  ul{ margin:0; padding:0; list-style:none; }
+  .container{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ============ TICKER ============ */
+  .ticker-bar{
+    background:var(--accent);
+    color:var(--ink);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--accent-deep);
+  }
+  .ticker-track{
+    display:inline-block;
+    padding:6px 0;
+    font-family:var(--font-mono);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    animation: desplazar 22s linear infinite;
+  }
+  .ticker-track span{ padding:0 18px; }
+  @keyframes desplazar{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ============ HEADER ============ */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(20,21,26,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px; max-width:var(--maxw); margin:0 auto; gap:16px;
+  }
+  .logo{ font-family:var(--font-display); font-size:22px; letter-spacing:.03em; white-space:nowrap; }
+  .logo span{ color:var(--accent); }
+  .main-nav{ display:flex; gap:28px; }
+  .main-nav a{ font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim); transition:color .15s; }
+  .main-nav a:hover{ color:var(--text); }
+  .header-actions{ display:flex; align-items:center; gap:14px; }
+
+  .icon-btn{
+    position:relative; background:none; border:1px solid var(--line); color:var(--text);
+    width:38px; height:38px; border-radius:var(--radius); display:flex; align-items:center; justify-content:center;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+  .cart-badge{
+    position:absolute; top:-8px; right:-8px; background:var(--accent); color:var(--ink);
+    font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:18px; height:18px;
+    border-radius:9px; display:flex; align-items:center; justify-content:center; padding:0 4px;
+  }
+
+  .auth-area{ display:flex; align-items:center; gap:10px; font-size:13px; }
+  .auth-user{ display:flex; align-items:center; gap:10px; }
+  .auth-user .saludo{ font-family:var(--font-mono); color:var(--accent); }
+
+  .btn{
+    font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase;
+    padding:10px 18px; border-radius:var(--radius); border:1px solid transparent; transition:transform .12s, background .15s;
+  }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--accent); color:var(--ink); }
+  .btn-primary:hover{ background:var(--accent-deep); }
+  .btn-outline{ background:transparent; color:var(--text); border-color:var(--line); }
+  .btn-outline:hover{ border-color:var(--text); }
+  .btn-ghost{ background:transparent; color:var(--text-dim); border:none; padding:6px 8px; font-size:12px; }
+  .btn-ghost:hover{ color:var(--text); }
+  .btn-sm{ padding:7px 12px; font-size:11px; }
+  .btn-block{ width:100%; }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; }
+
+  .hamburger{ display:none; background:none; border:1px solid var(--line); color:var(--text); width:38px; height:38px; border-radius:var(--radius); }
+
+  /* ============ HERO ============ */
+  .hero{
+    display:flex; gap:40px; align-items:stretch; flex-wrap:wrap;
+    padding:64px 0 56px; max-width:var(--maxw); margin:0 auto; padding-left:24px; padding-right:24px;
+  }
+  .hero-ticket{ flex:1 1 420px; display:flex; flex-direction:column; gap:22px; justify-content:center; }
+  .hero-stamp{
+    display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:13px; font-weight:700;
+    border:2px solid var(--accent); color:var(--accent); padding:5px 12px; transform:rotate(-3deg); letter-spacing:.1em;
+  }
+  .hero-ticket h1{ font-size:clamp(34px,5.4vw,58px); }
+  .hero-ticket h1 .accent{ color:var(--accent); }
+  .hero-ticket .lead{ color:var(--text-dim); font-size:16px; max-width:480px; }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .hero-manifest{
+    flex:1 1 320px; background:var(--paper); color:var(--ink); border-radius:var(--radius);
+    padding:26px; position:relative; align-self:center;
+    box-shadow: 6px 6px 0 var(--accent-deep);
+  }
+  .hero-manifest::before{
+    content:"MANIFIESTO DE ENVÍO"; position:absolute; top:-12px; left:20px; background:var(--ink); color:var(--paper);
+    font-family:var(--font-mono); font-size:11px; padding:3px 10px; letter-spacing:.08em;
+  }
+  .manifest-row{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--paper-shadow); font-family:var(--font-mono); font-size:13px; }
+  .manifest-row:last-child{ border-bottom:none; }
+  .manifest-row .clave{ color:var(--ink-soft); }
+  .manifest-row .valor{ font-weight:700; }
+
+  /* ============ SECCIONES GENERALES ============ */
+  section{ padding:72px 0; }
+  .section-head{ max-width:var(--maxw); margin:0 auto 36px; padding:0 24px; }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; color:var(--accent); letter-spacing:.14em; font-weight:700;
+  }
+  .section-head h2{ font-size:clamp(26px,3.6vw,40px); margin-top:8px; }
+  .section-head p.sub{ color:var(--text-dim); margin-top:10px; max-width:620px; }
+
+  /* ============ CATÁLOGO / TICKETS ============ */
+  .catalogo{ background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .grid-productos{
+    max-width:var(--maxw); margin:0 auto; padding:0 24px;
+    display:grid; gap:26px; grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  }
+  .producto-card{
+    background:var(--paper); color:var(--ink); border-radius:var(--radius); overflow:hidden;
+    display:flex; flex-direction:column; position:relative;
+    transition:transform .15s; 
+  }
+  .producto-card:hover{ transform:translateY(-4px); }
+
+  .card-media{
+    position:relative; height:200px; background:var(--cat-color, var(--bg-soft-2)); overflow:hidden;
+  }
+  .card-photo{ width:100%; height:100%; object-fit:cover; display:block; }
+  .cambiar-foto{
+    position:absolute; bottom:8px; right:8px; display:flex; align-items:center; gap:5px; z-index:2;
+    background:rgba(20,21,26,0.78); color:var(--paper); font-family:var(--font-mono); font-size:10px;
+    letter-spacing:.04em; padding:6px 9px; border-radius:2px; cursor:pointer; border:1px solid rgba(236,231,221,0.25);
+  }
+  .cambiar-foto:hover{ background:var(--accent-deep); }
+  .cambiar-foto svg{ width:13px; height:13px; stroke:var(--paper); fill:none; stroke-width:2; }
+  .cambiar-foto input[type="file"]{ position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+
+  .pill-drop{
+    position:absolute; top:10px; left:10px; background:var(--accent); color:var(--ink);
+    font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.08em; padding:3px 8px; border-radius:2px;
+  }
+  .stamp{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-12deg);
+    border:2px solid var(--stamp); color:var(--stamp); font-family:var(--font-mono); font-weight:700;
+    font-size:13px; letter-spacing:.06em; padding:4px 10px; background:rgba(20,21,26,0.55); white-space:nowrap;
+  }
+  .stamp-low{ border-color:var(--accent); color:var(--accent); }
+
+  .card-perfora{
+    position:relative; height:0; border-top:2px dashed var(--paper-shadow); margin:0 14px;
+  }
+  .card-perfora::before{
+    content:""; position:absolute; left:-20px; top:-7px; width:14px; height:14px; border-radius:50%;
+    background:var(--bg-soft); border:2px solid var(--paper-shadow);
+  }
+
+  .card-info{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-categoria{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); letter-spacing:.08em; text-transform:uppercase; }
+  .card-nombre{ font-size:17px; }
+  .card-marca{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); }
+  .card-color{ font-size:13px; color:var(--ink-soft); }
+
+  .talle-select{
+    font-family:var(--font-mono); font-size:12px; padding:6px 8px; border:1px solid var(--paper-shadow);
+    background:#fff; color:var(--ink); border-radius:2px;
+  }
+
+  .card-row{ display:flex; align-items:baseline; justify-content:space-between; margin-top:4px; }
+  .card-precio{ font-family:var(--font-display); font-size:20px; }
+  .card-stock{ font-size:11px; color:var(--ink-soft); font-family:var(--font-mono); }
+  .card-stock.bajo{ color:var(--stamp); font-weight:700; }
+
+  .barcode{
+    height:24px; margin-top:4px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px, var(--ink) 9px 11px, transparent 11px 14px);
+    opacity:.85;
+  }
+  .card-sku{ font-family:var(--font-mono); font-size:10px; color:var(--ink-soft); letter-spacing:.06em; }
+
+  .btn-add{ margin-top:8px; background:var(--ink); color:var(--paper); }
+  .btn-add:hover:not(:disabled){ background:var(--accent-deep); color:var(--paper); }
+
+  /* ============ MANIFIESTO / NOSOTROS ============ */
+  .valores{ max-width:var(--maxw); margin:0 auto; padding:0 24px; display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  .valor-item{ border:1px solid var(--line); border-radius:var(--radius); padding:22px; }
+  .valor-item .eyebrow{ display:block; margin-bottom:10px; }
+  .valor-item h3{ font-size:18px; margin-bottom:8px; }
+  .valor-item p{ color:var(--text-dim); font-size:14px; }
+
+  /* ============ ESQUEMA DE DATOS (documentación) ============ */
+  .esquema-datos{ background:var(--bg-soft); border-top:1px solid var(--line); }
+  .schema-intro{ max-width:var(--maxw); margin:0 auto 30px; padding:0 24px; color:var(--text-dim); font-size:15px; max-width:760px; }
+  .schema-wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:34px; }
+  .schema-card{ background:var(--paper); color:var(--ink); border-radius:var(--radius); padding:26px 26px 28px; }
+  .schema-card-head{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:18px; border-bottom:2px solid var(--ink); padding-bottom:12px; }
+  .schema-card-head h3{ font-size:21px; }
+  .schema-tag{ font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; padding:4px 9px; border:1px solid var(--ink); }
+  .schema-tag.principal{ background:var(--accent); border-color:var(--accent-deep); }
+
+  table.schema-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  table.schema-table caption{ display:none; }
+  table.schema-table th, table.schema-table td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--paper-shadow); vertical-align:top; }
+  table.schema-table th{ font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  table.schema-table td.campo{ font-family:var(--font-mono); font-weight:700; white-space:nowrap; }
+  table.schema-table td.tipo{ font-family:var(--font-mono); color:var(--ink-soft); white-space:nowrap; }
+  .clave-pk{ background:var(--ink); color:var(--paper); font-family:var(--font-mono); font-size:10.5px; padding:2px 7px; border-radius:2px; letter-spacing:.04em; }
+  .clave-cand{ background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:10.5px; padding:2px 7px; border:1px solid var(--ink-soft); border-radius:2px; }
+  .clave-norm{ color:var(--ink-soft); font-size:12px; }
+
+  .justificacion{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--paper-shadow); font-size:13.5px; color:var(--ink); }
+  .justificacion strong{ font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:6px; color:var(--accent-deep); }
+  .schema-foot{ margin-top:14px; font-size:12px; color:var(--ink-soft); font-style:italic; }
+
+  /* ============ FOOTER ============ */
+  footer{ padding:46px 0 36px; border-top:1px solid var(--line); }
+  .footer-inner{ max-width:var(--maxw); margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  footer .logo{ margin-bottom:8px; }
+  footer .nota{ color:var(--text-dim); font-size:12.5px; max-width:420px; }
+  .footer-links{ display:flex; gap:18px; font-size:13px; color:var(--text-dim); }
+  .footer-links a:hover{ color:var(--text); }
+
+  /* ============ MODALES (registro / login) ============ */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(10,10,12,0.72); display:none; align-items:center; justify-content:center;
+    padding:20px; z-index:80;
+  }
+  .modal-overlay.activo{ display:flex; }
+  .modal{
+    background:var(--paper); color:var(--ink); width:min(440px,100%); border-radius:var(--radius);
+    padding:30px 28px 26px; position:relative; max-height:92vh; overflow-y:auto;
+  }
+  .modal[hidden]{ display:none; }
+  .modal-close{ position:absolute; top:14px; right:14px; background:none; border:none; font-size:20px; color:var(--ink-soft); }
+  .modal .eyebrow{ display:block; margin-bottom:6px; }
+  .modal h2{ font-size:24px; color:var(--ink); margin-bottom:4px; }
+  .modal .modal-sub{ color:var(--ink-soft); font-size:13px; margin-bottom:20px; }
+
+  .campo{ margin-bottom:14px; display:flex; flex-direction:column; gap:5px; }
+  .campo label{ font-size:12px; font-weight:600; letter-spacing:.02em; }
+  .campo input, .campo select{
+    font-family:var(--font-body); font-size:14px; padding:10px 11px; border:1px solid var(--paper-shadow);
+    border-radius:2px; background:#fff; color:var(--ink);
+  }
+  .campo input:focus, .campo select:focus{ border-color:var(--accent); }
+  .fila-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .campo .error{ font-size:11.5px; color:var(--stamp); min-height:14px; }
+  .pass-wrap{ position:relative; display:flex; }
+  .pass-wrap input{ flex:1; }
+  .pass-toggle{ position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:11px; font-weight:700; color:var(--ink-soft); }
+
+  .form-msg{ font-size:13px; padding:9px 10px; border-radius:2px; margin-bottom:14px; display:none; }
+  .form-msg.visible{ display:block; }
+  .form-msg.error{ background:rgba(200,30,44,0.12); color:var(--stamp); }
+  .form-msg.ok{ background:rgba(63,174,106,0.14); color:var(--ok); }
+
+  .modal-switch{ text-align:center; margin-top:16px; font-size:13px; color:var(--ink-soft); }
+  .modal-switch button{ background:none; border:none; color:var(--accent-deep); font-weight:700; text-decoration:underline; }
+
+  /* ============ CARRITO ============ */
+  .drawer-overlay{ position:fixed; inset:0; background:rgba(10,10,12,0.6); display:none; z-index:70; }
+  .drawer-overlay.activo{ display:block; }
+  .cart-drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(400px,100%); background:var(--bg-soft);
+    border-left:1px solid var(--line); z-index:75; transform:translateX(100%); transition:transform .22s ease;
+    display:flex; flex-direction:column;
+  }
+  .cart-drawer.activo{ transform:translateX(0); }
+  .cart-head{ display:flex; justify-content:space-between; align-items:center; padding:18px 20px; border-bottom:1px solid var(--line); }
+  .cart-head h2{ font-size:18px; }
+  .cart-items{ flex:1; overflow-y:auto; padding:14px 20px; display:flex; flex-direction:column; gap:14px; }
+  .cart-empty{ color:var(--text-dim); font-size:14px; text-align:center; padding:40px 10px; }
+  .cart-item{ display:flex; gap:12px; border-bottom:1px solid var(--line); padding-bottom:12px; }
+  .cart-item .ci-icon{ width:46px; height:46px; background:var(--bg-soft-2); border-radius:2px; overflow:hidden; flex-shrink:0; }
+  .cart-item .ci-icon img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ci-info{ flex:1; min-width:0; }
+  .ci-nombre{ font-size:13.5px; font-weight:600; }
+  .ci-meta{ font-size:11.5px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px; }
+  .ci-controls{ display:flex; align-items:center; gap:8px; margin-top:8px; }
+  .qty-btn{ background:var(--bg-soft-2); border:1px solid var(--line); color:var(--text); width:24px; height:24px; border-radius:2px; font-size:13px; }
+  .ci-qty{ font-family:var(--font-mono); font-size:13px; min-width:18px; text-align:center; }
+  .ci-quitar{ margin-left:auto; background:none; border:none; color:var(--text-dim); font-size:11.5px; text-decoration:underline; }
+  .ci-precio{ font-family:var(--font-mono); font-size:13px; white-space:nowrap; }
+
+  .cart-foot{ border-top:1px solid var(--line); padding:18px 20px 22px; }
+  .cart-total-row{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:15px; margin-bottom:14px; }
+  .cart-total-row strong{ color:var(--accent); }
+
+  /* ============ TOAST ============ */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translate(-50%,20px); background:var(--ink); color:var(--paper);
+    font-size:13.5px; padding:12px 20px; border-radius:3px; border-left:4px solid var(--accent);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:100; max-width:90vw; text-align:center;
+  }
+  .toast.warn{ border-left-color:var(--stamp); }
+  .toast.visible{ opacity:1; transform:translate(-50%,0); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 880px){
+    .main-nav{ position:fixed; top:0; right:0; height:100vh; width:min(280px,80vw); background:var(--bg-soft);
+      flex-direction:column; padding:90px 26px 26px; gap:22px; transform:translateX(100%); transition:transform .2s; z-index:60;
+      border-left:1px solid var(--line);
+    }
+    .main-nav.abierto{ transform:translateX(0); }
+    .hamburger{ display:flex; align-items:center; justify-content:center; }
+    .auth-area .auth-text{ display:none; }
+  }
+  @media (max-width:560px){
+    .fila-2{ grid-template-columns:1fr; }
+    .hero-manifest::before{ left:14px; }
+    .footer-inner{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker-bar" aria-hidden="true">
+    <div class="ticker-track">
+      <span>ENVÍOS A TODO EL PAÍS</span><span>·</span><span>DROP 026 — STOCK LIMITADO</span><span>·</span>
+      <span>REGISTRATE PARA COMPRAR</span><span>·</span>
+      <span>ENVÍOS A TODO EL PAÍS</span><span>·</span><span>DROP 026 — STOCK LIMITADO</span><span>·</span>
+      <span>REGISTRATE PARA COMPRAR</span><span>·</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#inicio" class="logo">RORO<span>WEB</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#manifiesto">Nosotros</a>
+        <a href="#esquema-datos">Ficha técnica</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="cartBtn" aria-label="Abrir carrito">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+          <span class="cart-badge" id="cartBadge" hidden>0</span>
+        </button>
+
+        <div class="auth-area" id="authArea"><!-- generado por JS --></div>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section id="inicio" style="padding-top:8px;">
+      <div class="hero">
+        <div class="hero-ticket">
+          <span class="hero-stamp">DROP 026 · EDICIÓN LIMITADA</span>
+          <h1>Ropa hype<br><span class="accent">sin restock.</span></h1>
+          <p class="lead">Streetwear de tiradas cortas. Cada pieza queda registrada con su propio número de lote: cuando se agota una talla, no vuelve a producirse.</p>
+          <div class="hero-cta">
+            <button class="btn btn-primary" id="btnVerCatalogo">Ver catálogo</button>
+            <button class="btn btn-outline" id="btnCrearCuentaHero">Crear cuenta gratis</button>
+          </div>
+        </div>
+
+        <div class="hero-manifest" aria-hidden="true">
+          <div class="manifest-row"><span class="clave">ESTADO</span><span class="valor">EN TRÁNSITO</span></div>
+          <div class="manifest-row"><span class="clave">ORIGEN</span><span class="valor">STREET LAB</span></div>
+          <div class="manifest-row"><span class="clave">DESTINO</span><span class="valor">TU CLOSET</span></div>
+          <div class="manifest-row"><span class="clave">LOTE</span><span class="valor">026-A</span></div>
+          <div class="manifest-row"><span class="clave">UNIDADES</span><span class="valor">LIMITADAS</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CATÁLOGO ===================== -->
+    <section id="catalogo" class="catalogo">
+      <div class="section-head">
+        <span class="eyebrow">ITEM MANIFEST</span>
+        <h2>Catálogo</h2>
+        <p class="sub">Elegí talle antes de sumar al carrito. Las unidades marcadas como últimas no se repondrán.</p>
+      </div>
+      <div class="grid-productos" id="gridProductos"><!-- generado por JS desde el array "productos" --></div>
+    </section>
+
+    <!-- ===================== NOSOTROS ===================== -->
+    <section id="manifiesto">
+      <div class="section-head">
+        <span class="eyebrow">MANIFIESTO</span>
+        <h2>Quiénes somos</h2>
+      </div>
+      <div class="valores">
+        <div class="valor-item">
+          <span class="eyebrow">01 · DROPS</span>
+          <h3>Tiradas chicas</h3>
+          <p>Producimos lotes acotados. Cuando el stock de un registro llega a cero, ese producto se cierra para siempre.</p>
+        </div>
+        <div class="valor-item">
+          <span class="eyebrow">02 · CALIDAD</span>
+          <h3>Materiales propios</h3>
+          <p>Telas pesadas, estampados de alta densidad y terminaciones pensadas para uso diario, no solo para la foto.</p>
+        </div>
+        <div class="valor-item">
+          <span class="eyebrow">03 · COMUNIDAD</span>
+          <h3>Cuenta = acceso</h3>
+          <p>El catálogo es público, pero comprar requiere una cuenta registrada: así priorizamos a quienes ya forman parte de FRGHT CO.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ESQUEMA DE DATOS (documentación pedida por la consigna) ===================== -->
+    <section id="esquema-datos" class="esquema-datos">
+      <div class="section-head">
+        <span class="eyebrow">ANEXO TÉCNICO</span>
+        <h2>Esquema de datos — diseño de registros</h2>
+      </div>
+      <p class="schema-intro">
+        Antes de programar el catálogo y el alta de cuentas, se definió la estructura de los dos registros principales
+        de la app: el <strong>Producto</strong> (registro principal, vinculado a lo que se vende) y el <strong>Usuario</strong>
+        (necesario porque la tienda exige registro para comprar). Para cada campo se indica el tipo de dato esperado y,
+        al final de cada tabla, se identifica y justifica la clave elegida.
+      </p>
+
+      <div class="schema-wrap">
+        <!-- REGISTRO PRODUCTO -->
+        <article class="schema-card">
+          <div class="schema-card-head">
+            <h3>Registro: Producto</h3>
+            <span class="schema-tag principal">Registro principal</span>
+          </div>
+
+          <table class="schema-table">
+            <caption>Campos del registro Producto</caption>
+            <thead>
+              <tr><th>Campo</th><th>Tipo de dato</th><th>Clave / restricción</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="campo">id_producto</td><td class="tipo">Entero (autoincremental)</td><td><span class="clave-pk">CLAVE PRIMARIA</span></td></tr>
+              <tr><td class="campo">sku</td><td class="tipo">Alfanumérico (20)</td><td><span class="clave-cand">Clave candidata</span> · única, no nula</td></tr>
+              <tr><td class="campo">nombre_producto</td><td class="tipo">Texto corto (100)</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">descripcion</td><td class="tipo">Texto largo</td><td><span class="clave-norm">Opcional</span></td></tr>
+              <tr><td class="campo">categoria</td><td class="tipo">Texto corto (50)</td><td><span class="clave-norm">No nulo · lista cerrada</span></td></tr>
+              <tr><td class="campo">marca</td><td class="tipo">Texto corto (50)</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">color</td><td class="tipo">Texto corto (30)</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">imagen_url</td><td class="tipo">Texto / URL (255)</td><td><span class="clave-norm">Opcional · reemplazable desde la tarjeta del producto</span></td></tr>
+              <tr><td class="campo">talles_disponibles</td><td class="tipo">Lista de texto</td><td><span class="clave-norm">No nulo (mínimo 1 talle)</span></td></tr>
+              <tr><td class="campo">precio</td><td class="tipo">Decimal (10,2)</td><td><span class="clave-norm">No nulo · mayor a 0</span></td></tr>
+              <tr><td class="campo">stock</td><td class="tipo">Entero</td><td><span class="clave-norm">No nulo · mayor o igual a 0</span></td></tr>
+              <tr><td class="campo">destacado</td><td class="tipo">Booleano</td><td><span class="clave-norm">Por defecto: falso</span></td></tr>
+              <tr><td class="campo">fecha_ingreso</td><td class="tipo">Fecha</td><td><span class="clave-norm">Por defecto: fecha actual</span></td></tr>
+            </tbody>
+          </table>
+
+          <div class="justificacion">
+            <strong>Identificación y justificación de la clave</strong>
+            <p>
+              Se eligió <strong>id_producto</strong> (entero autoincremental) como clave primaria en lugar de
+              <strong>nombre_producto</strong> o <strong>sku</strong>. El nombre se descarta porque no es único:
+              dos variantes de color o de talle de la misma prenda pueden compartir nombre. El SKU sí es único y
+              funciona como <em>clave candidata</em> (el código que de hecho se escanea en el local), pero es un
+              dato de negocio que en teoría puede recodificarse si cambia el sistema de catalogación. Un identificador
+              numérico generado por el sistema es más liviano para indexar y para vincular este registro con otras
+              tablas (carrito, pedidos, devoluciones), y nunca cambia aunque cambien los datos descriptivos del producto.
+            </p>
+          </div>
+          <p class="schema-foot">Cada producto arranca con una foto de referencia en <code>imagen_url</code>. Con el botón "Cambiar foto" de cada tarjeta podés reemplazarla por una imagen propia: se previsualiza al instante en el navegador, sin subirse a ningún servidor.</p>
+        </article>
+
+        <!-- REGISTRO USUARIO -->
+        <article class="schema-card">
+          <div class="schema-card-head">
+            <h3>Registro: Usuario</h3>
+            <span class="schema-tag">Registro de soporte (registro/login)</span>
+          </div>
+
+          <table class="schema-table">
+            <caption>Campos del registro Usuario</caption>
+            <thead>
+              <tr><th>Campo</th><th>Tipo de dato</th><th>Clave / restricción</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="campo">id_usuario</td><td class="tipo">Entero (autoincremental)</td><td><span class="clave-pk">CLAVE PRIMARIA</span></td></tr>
+              <tr><td class="campo">nombre</td><td class="tipo">Texto corto (50)</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">apellido</td><td class="tipo">Texto corto (50)</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">email</td><td class="tipo">Texto corto (100)</td><td><span class="clave-cand">Clave candidata</span> · única, no nula</td></tr>
+              <tr><td class="campo">contraseña</td><td class="tipo">Texto cifrado (hash)</td><td><span class="clave-norm">No nulo · mínimo 6 caracteres</span></td></tr>
+              <tr><td class="campo">fecha_nacimiento</td><td class="tipo">Fecha</td><td><span class="clave-norm">No nulo</span></td></tr>
+              <tr><td class="campo">telefono</td><td class="tipo">Texto corto (20)</td><td><span class="clave-norm">Opcional</span></td></tr>
+              <tr><td class="campo">fecha_registro</td><td class="tipo">Fecha y hora</td><td><span class="clave-norm">Por defecto: momento del alta</span></td></tr>
+            </tbody>
+          </table>
+
+          <div class="justificacion">
+            <strong>Identificación y justificación de la clave</strong>
+            <p>
+              Se eligió <strong>id_usuario</strong> como clave primaria en lugar de <strong>email</strong>, aunque el
+              email también es único. La razón es que el email es un dato que la persona puede cambiar (por ejemplo,
+              si migra a otra cuenta de correo), y modificar una clave primaria obligaría a actualizar en cascada
+              todas las tablas relacionadas (pedidos, carrito, direcciones). Un id numérico fijo evita ese problema:
+              el email queda como clave candidata, usada solo para identificar al usuario al iniciar sesión.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <a href="#inicio" class="logo">RORO<span>WEB</span></a>
+        <p class="nota">Prototipo académico de diseño front-end para una app de e-commerce. No procesa pagos reales: los registros de usuarios y el carrito viven en memoria mientras la página está abierta y se reinician al recargar.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#manifiesto">Nosotros</a>
+        <a href="#esquema-datos">Ficha técnica</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== MODALES: REGISTRO / LOGIN ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal" id="modalRegistro" hidden role="dialog" aria-labelledby="tituloRegistro">
+      <button class="modal-close" id="cerrarRegistro" aria-label="Cerrar">✕</button>
+      <span class="eyebrow">ALTA DE USUARIO</span>
+      <h2 id="tituloRegistro">Crear cuenta</h2>
+      <p class="modal-sub">Se necesita una cuenta para sumar productos al carrito y comprar.</p>
+
+      <div class="form-msg" id="msgRegistro"></div>
+
+      <form id="formRegistro" novalidate>
+        <div class="fila-2">
+          <div class="campo">
+            <label for="regNombre">Nombre</label>
+            <input type="text" id="regNombre" autocomplete="given-name">
+            <span class="error" id="errRegNombre"></span>
+          </div>
+          <div class="campo">
+            <label for="regApellido">Apellido</label>
+            <input type="text" id="regApellido" autocomplete="family-name">
+            <span class="error" id="errRegApellido"></span>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" autocomplete="email">
+          <span class="error" id="errRegEmail"></span>
+        </div>
+
+        <div class="fila-2">
+          <div class="campo">
+            <label for="regPass">Contraseña</label>
+            <div class="pass-wrap">
+              <input type="password" id="regPass" autocomplete="new-password">
+              <button type="button" class="pass-toggle" data-target="regPass">MOSTRAR</button>
+            </div>
+            <span class="error" id="errRegPass"></span>
+          </div>
+          <div class="campo">
+            <label for="regPass2">Repetir contraseña</label>
+            <div class="pass-wrap">
+              <input type="password" id="regPass2" autocomplete="new-password">
+              <button type="button" class="pass-toggle" data-target="regPass2">MOSTRAR</button>
+            </div>
+            <span class="error" id="errRegPass2"></span>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="regFecha">Fecha de nacimiento</label>
+          <input type="date" id="regFecha">
+          <span class="error" id="errRegFecha"></span>
+        </div>
+
+        <div class="campo">
+          <label for="regTelefono">Teléfono (opcional)</label>
+          <input type="tel" id="regTelefono" autocomplete="tel">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
+      </form>
+
+      <p class="modal-switch">¿Ya tenés cuenta? <button type="button" id="irALogin">Iniciá sesión</button></p>
+    </div>
+
+    <div class="modal" id="modalLogin" hidden role="dialog" aria-labelledby="tituloLogin">
+      <button class="modal-close" id="cerrarLogin" aria-label="Cerrar">✕</button>
+      <span class="eyebrow">ACCESO</span>
+      <h2 id="tituloLogin">Iniciar sesión</h2>
+      <p class="modal-sub">Ingresá con el email y la contraseña de tu cuenta.</p>
+
+      <div class="form-msg" id="msgLogin"></div>
+
+      <form id="formLogin" novalidate>
+        <div class="campo">
+          <label for="logEmail">Email</label>
+          <input type="email" id="logEmail" autocomplete="email">
+          <span class="error" id="errLogEmail"></span>
+        </div>
+        <div class="campo">
+          <label for="logPass">Contraseña</label>
+          <div class="pass-wrap">
+            <input type="password" id="logPass" autocomplete="current-password">
+            <button type="button" class="pass-toggle" data-target="logPass">MOSTRAR</button>
+          </div>
+          <span class="error" id="errLogPass"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+      </form>
+
+      <p class="modal-switch">¿No tenés cuenta? <button type="button" id="irARegistro">Registrate</button></p>
+    </div>
+  </div>
+
+  <!-- ===================== CARRITO ===================== -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+    <div class="cart-head">
+      <h2>Tu carrito</h2>
+      <button class="modal-close" id="cerrarCarrito" aria-label="Cerrar carrito" style="position:static;">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <button class="btn btn-primary btn-block" id="btnFinalizar">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   DATOS — el array "productos" implementa, registro por
+   registro, el esquema documentado en #esquema-datos.
+   id_producto cumple el rol de clave primaria.
+========================================================= */
+const productos = [
+  { id_producto:1, sku:'FRG-HD-001', nombre_producto:'Buzo "BLACKOUT"', descripcion:'Buzo canguro de algodón pesado 380gsm, capucha forrada.', categoria:'Buzos', marca:'FRGHT CO.', color:'Negro', talles:['S','M','L','XL'], precio:45000, stock:12, destacado:true, imagen:'https://picsum.photos/seed/frght-hoodie/640/640' },
+  { id_producto:2, sku:'FRG-RM-002', nombre_producto:'Remera "CONCRETE TEE"', descripcion:'Remera oversize de jersey grueso con estampado al frente.', categoria:'Remeras', marca:'FRGHT CO.', color:'Gris cemento', talles:['S','M','L','XL','XXL'], precio:22000, stock:30, destacado:false, imagen:'https://picsum.photos/seed/frght-tee/640/640' },
+  { id_producto:3, sku:'FRG-CP-003', nombre_producto:'Campera "FLIGHT BOMBER"', descripcion:'Campera bomber acolchada, forro interno y bolsillos cargo.', categoria:'Camperas', marca:'FRGHT LAB', color:'Verde militar', talles:['M','L','XL'], precio:78000, stock:4, destacado:true, imagen:'https://picsum.photos/seed/frght-jacket/640/640' },
+  { id_producto:4, sku:'FRG-PT-004', nombre_producto:'Cargo "UTILITY 6-POCKET"', descripcion:'Pantalón cargo de seis bolsillos, cintura ajustable.', categoria:'Pantalones', marca:'FRGHT CO.', color:'Beige', talles:['38','40','42','44'], precio:52000, stock:18, destacado:false, imagen:'https://picsum.photos/seed/frght-pants/640/640' },
+  { id_producto:5, sku:'FRG-GR-005', nombre_producto:'Gorra "FREIGHT CAP"', descripcion:'Gorra trucker con frente estructurado y broche trasero.', categoria:'Gorras', marca:'FRGHT CO.', color:'Negro / Naranja', talles:['Único'], precio:15000, stock:40, destacado:false, imagen:'https://picsum.photos/seed/frght-cap/640/640' },
+  { id_producto:6, sku:'FRG-ZP-006', nombre_producto:'Zapatillas "RUNWAY 99"', descripcion:'Zapatillas chunky de suela alta, edición limitada.', categoria:'Calzado', marca:'FRGHT LAB', color:'Blanco / Naranja', talles:['38','39','40','41','42','43','44','45'], precio:95000, stock:0, destacado:true, imagen:'https://picsum.photos/seed/frght-sneaker/640/640' },
+  { id_producto:7, sku:'FRG-MC-007', nombre_producto:'Mochila "CARGO PACK"', descripcion:'Mochila resistente al agua con bolsillo frontal técnico.', categoria:'Accesorios', marca:'FRGHT CO.', color:'Negro', talles:['Único'], precio:38000, stock:9, destacado:false, imagen:'https://picsum.photos/seed/frght-backpack/640/640' },
+  { id_producto:8, sku:'FRG-MD-008', nombre_producto:'Medias "LOGO SOCKS" (pack x3)', descripcion:'Pack de tres pares de medias con logo tejido.', categoria:'Accesorios', marca:'FRGHT CO.', color:'Multicolor', talles:['Único'], precio:8000, stock:60, destacado:false, imagen:'https://picsum.photos/seed/frght-socks/640/640' },
+];
+
+/* El array "usuarios" implementa el registro Usuario documentado.
+   id_usuario cumple el rol de clave primaria; email es clave candidata. */
+let usuarios = [];
+let usuarioActual = null;
+let proximoIdUsuario = 1;
+
+/* carritos: { [id_usuario]: [ {id_producto, talle, cantidad} ] } */
+let carritos = {};
+
+const COLOR_CATEGORIA = {
+  'Buzos':'#2e2f38','Remeras':'#23242b','Camperas':'#33291f','Pantalones':'#262a22',
+  'Gorras':'#2b2520','Calzado':'#1f2630','Accesorios':'#262228'
+};
+
+function formatearPrecio(n){
+  return '$' + n.toLocaleString('es-AR');
+}
+
+/* ============ RENDER CATÁLOGO ============ */
+function badgeEstado(p){
+  if(p.stock === 0) return '<div class="stamp">AGOTADO</div>';
+  if(p.stock <= 5) return `<div class="stamp stamp-low">ÚLTIMAS ${p.stock}</div>`;
+  return '';
+}
+
+function renderProductos(){
+  const cont = document.getElementById('gridProductos');
+  cont.innerHTML = productos.map(p => {
+    const selectTalle = p.talles.length > 1
+      ? `<select class="talle-select" aria-label="Talle de ${p.nombre_producto}">${p.talles.map(t=>`<option value="${t}">Talle ${t}</option>`).join('')}</select>`
+      : `<span class="card-marca">Talle ${p.talles[0]}</span>`;
+    return `
+    <article class="producto-card" data-id="${p.id_producto}">
+      <div class="card-media" style="--cat-color:${COLOR_CATEGORIA[p.categoria] || '#20212a'}">
+        ${p.destacado ? '<span class="pill-drop">DROP</span>' : ''}
+        ${badgeEstado(p)}
+        <img class="card-photo" src="${p.imagen}" alt="Foto de ${p.nombre_producto}" loading="lazy">
+        <label class="cambiar-foto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h3l2-3h8l2 3h3v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          Cambiar foto
+          <input type="file" accept="image/*" data-id="${p.id_producto}">
+        </label>
+      </div>
+      <div class="card-perfora"></div>
+      <div class="card-info">
+        <span class="card-categoria">${p.categoria} · ${p.marca}</span>
+        <h3 class="card-nombre">${p.nombre_producto}</h3>
+        <p class="card-color">Color: ${p.color}</p>
+        ${selectTalle}
+        <div class="card-row">
+          <span class="card-precio">${formatearPrecio(p.precio)}</span>
+          <span class="card-stock ${p.stock<=5 && p.stock>0 ? 'bajo':''}">${p.stock>0 ? p.stock+' en stock' : 'Sin stock'}</span>
+        </div>
+        <div class="barcode" aria-hidden="true"></div>
+        <span class="card-sku">SKU ${p.sku}</span>
+        <button class="btn btn-add btn-sm" data-accion="agregar" data-id="${p.id_producto}" ${p.stock===0?'disabled':''}>
+          ${p.stock===0 ? 'Agotado' : 'Sumar al carrito'}
+        </button>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* Delegación de eventos: click en "Sumar al carrito" */
+document.getElementById('gridProductos').addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-accion="agregar"]');
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const card = btn.closest('.producto-card');
+  const select = card.querySelector('.talle-select');
+  const talle = select ? select.value : (productos.find(p=>p.id_producto===id).talles[0]);
+  agregarAlCarrito(id, talle);
+});
+
+/* Cambiar foto: el archivo elegido se previsualiza en el navegador (no se sube a ningún servidor)
+   y queda guardado en el campo imagen_url del registro Producto para esta sesión. */
+document.getElementById('gridProductos').addEventListener('change', (e)=>{
+  const input = e.target.closest('input[type="file"]');
+  if(!input || !input.files[0]) return;
+  const id = Number(input.dataset.id);
+  const producto = productos.find(p=>p.id_producto===id);
+  if(!producto) return;
+  const lector = new FileReader();
+  lector.onload = ()=>{
+    producto.imagen = lector.result;
+    const card = input.closest('.producto-card');
+    card.querySelector('.card-photo').src = lector.result;
+    mostrarToast(`Foto actualizada para ${producto.nombre_producto}.`);
+  };
+  lector.readAsDataURL(input.files[0]);
+});
+
+/* ============ MODALES ============ */
+const modalOverlay = document.getElementById('modalOverlay');
+const modalRegistro = document.getElementById('modalRegistro');
+const modalLogin = document.getElementById('modalLogin');
+
+function abrirModal(cual){
+  modalOverlay.classList.add('activo');
+  modalRegistro.hidden = cual !== 'registro';
+  modalLogin.hidden = cual !== 'login';
+  limpiarMensajes();
+  const primerInput = (cual==='registro'?modalRegistro:modalLogin).querySelector('input');
+  if(primerInput) setTimeout(()=>primerInput.focus(), 30);
+}
+function cerrarModales(){
+  modalOverlay.classList.remove('activo');
+}
+function limpiarMensajes(){
+  document.querySelectorAll('.form-msg').forEach(m=>{ m.classList.remove('visible','error','ok'); m.textContent=''; });
+  document.querySelectorAll('.campo .error').forEach(e=> e.textContent='');
+}
+
+document.getElementById('btnCrearCuentaHero').addEventListener('click', ()=>abrirModal('registro'));
+document.getElementById('cerrarRegistro').addEventListener('click', cerrarModales);
+document.getElementById('cerrarLogin').addEventListener('click', cerrarModales);
+document.getElementById('irALogin').addEventListener('click', ()=>abrirModal('login'));
+document.getElementById('irARegistro').addEventListener('click', ()=>abrirModal('registro'));
+modalOverlay.addEventListener('click', (e)=>{ if(e.target === modalOverlay) cerrarModales(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ cerrarModales(); cerrarCarrito(); } });
+
+document.querySelectorAll('.pass-toggle').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const input = document.getElementById(btn.dataset.target);
+    const mostrando = input.type === 'text';
+    input.type = mostrando ? 'password' : 'text';
+    btn.textContent = mostrando ? 'MOSTRAR' : 'OCULTAR';
+  });
+});
+
+document.getElementById('btnVerCatalogo').addEventListener('click', ()=>{
+  document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ VALIDACIÓN Y ALTA DE USUARIO ============ */
+function validarEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+document.getElementById('formRegistro').addEventListener('submit', function(e){
+  e.preventDefault();
+  limpiarMensajes();
+  let ok = true;
+  const nombre = document.getElementById('regNombre').value.trim();
+  const apellido = document.getElementById('regApellido').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('regPass').value;
+  const pass2 = document.getElementById('regPass2').value;
+  const fecha = document.getElementById('regFecha').value;
+  const telefono = document.getElementById('regTelefono').value.trim();
+
+  if(!nombre){ document.getElementById('errRegNombre').textContent='Ingresá tu nombre.'; ok=false; }
+  if(!apellido){ document.getElementById('errRegApellido').textContent='Ingresá tu apellido.'; ok=false; }
+  if(!validarEmail(email)){ document.getElementById('errRegEmail').textContent='Email inválido.'; ok=false; }
+  else if(usuarios.some(u=>u.email===email)){ document.getElementById('errRegEmail').textContent='Ya existe una cuenta con ese email.'; ok=false; }
+  if(pass.length < 6){ document.getElementById('errRegPass').textContent='Mínimo 6 caracteres.'; ok=false; }
+  if(pass !== pass2){ document.getElementById('errRegPass2').textContent='No coincide.'; ok=false; }
+  if(!fecha){ document.getElementById('errRegFecha').textContent='Ingresá tu fecha de nacimiento.'; ok=false; }
+
+  if(!ok){
+    mostrarMsg('msgRegistro','Revisá los campos marcados.','error');
+    return;
+  }
+
+  /* Alta del registro Usuario (id_usuario = clave primaria autoincremental) */
+  const nuevoUsuario = {
+    id_usuario: proximoIdUsuario++,
+    nombre, apellido, email,
+    contraseña: pass, /* en una app real esto se guardaría con hash, nunca en texto plano */
+    fecha_nacimiento: fecha,
+    telefono: telefono || null,
+    fecha_registro: new Date().toISOString(),
+  };
+  usuarios.push(nuevoUsuario);
+  carritos[nuevoUsuario.id_usuario] = [];
+  usuarioActual = nuevoUsuario;
+
+  this.reset();
+  cerrarModales();
+  actualizarAuthUI();
+  mostrarToast(`¡Cuenta creada! Bienvenido/a, ${nombre}.`);
+});
+
+document.getElementById('formLogin').addEventListener('submit', function(e){
+  e.preventDefault();
+  limpiarMensajes();
+  const email = document.getElementById('logEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('logPass').value;
+  let ok = true;
+  if(!validarEmail(email)){ document.getElementById('errLogEmail').textContent='Email inválido.'; ok=false; }
+  if(!pass){ document.getElementById('errLogPass').textContent='Ingresá tu contraseña.'; ok=false; }
+  if(!ok) return;
+
+  const encontrado = usuarios.find(u=>u.email===email && u.contraseña===pass);
+  if(!encontrado){
+    mostrarMsg('msgLogin','Email o contraseña incorrectos.','error');
+    return;
+  }
+  usuarioActual = encontrado;
+  this.reset();
+  cerrarModales();
+  actualizarAuthUI();
+  mostrarToast(`Hola de nuevo, ${encontrado.nombre}.`);
+});
+
+function mostrarMsg(id, texto, tipo){
+  const el = document.getElementById(id);
+  el.textContent = texto;
+  el.classList.add('visible', tipo);
+}
+
+/* ============ HEADER: ESTADO DE SESIÓN ============ */
+function actualizarAuthUI(){
+  const cont = document.getElementById('authArea');
+  if(usuarioActual){
+    cont.innerHTML = `
+      <div class="auth-user">
+        <span class="saludo auth-text">Hola, ${usuarioActual.nombre}</span>
+        <button class="btn btn-outline btn-sm" id="btnSalir">Salir</button>
+      </div>`;
+    document.getElementById('btnSalir').addEventListener('click', cerrarSesion);
+  } else {
+    cont.innerHTML = `
+      <button class="btn btn-ghost auth-text" id="btnLogin">Iniciar sesión</button>
+      <button class="btn btn-primary btn-sm" id="btnRegistro">Registrarme</button>`;
+    document.getElementById('btnLogin').addEventListener('click', ()=>abrirModal('login'));
+    document.getElementById('btnRegistro').addEventListener('click', ()=>abrirModal('registro'));
+  }
+  actualizarBadgeCarrito();
+}
+
+function cerrarSesion(){
+  usuarioActual = null;
+  cerrarCarrito();
+  actualizarAuthUI();
+  mostrarToast('Sesión cerrada.');
+}
+
+/* ============ CARRITO ============ */
+const cartDrawer = document.getElementById('cartDrawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+
+function abrirCarrito(){
+  cartDrawer.classList.add('activo');
+  drawerOverlay.classList.add('activo');
+  renderCarrito();
+}
+function cerrarCarrito(){
+  cartDrawer.classList.remove('activo');
+  drawerOverlay.classList.remove('activo');
+}
+document.getElementById('cartBtn').addEventListener('click', abrirCarrito);
+document.getElementById('cerrarCarrito').addEventListener('click', cerrarCarrito);
+drawerOverlay.addEventListener('click', cerrarCarrito);
+
+function agregarAlCarrito(idProducto, talle){
+  if(!usuarioActual){
+    mostrarToast('Iniciá sesión o creá una cuenta para sumar al carrito.', true);
+    abrirModal('login');
+    return;
+  }
+  const producto = productos.find(p=>p.id_producto===idProducto);
+  if(!producto || producto.stock===0) return;
+
+  const carrito = carritos[usuarioActual.id_usuario];
+  const existente = carrito.find(i=>i.id_producto===idProducto && i.talle===talle);
+  if(existente){ existente.cantidad++; }
+  else { carrito.push({ id_producto:idProducto, talle, cantidad:1 }); }
+
+  actualizarBadgeCarrito();
+  mostrarToast(`${producto.nombre_producto} (talle ${talle}) sumado al carrito.`);
+}
+
+function actualizarBadgeCarrito(){
+  const badge = document.getElementById('cartBadge');
+  const total = usuarioActual ? carritos[usuarioActual.id_usuario].reduce((a,i)=>a+i.cantidad,0) : 0;
+  badge.hidden = total === 0;
+  badge.textContent = total;
+}
+
+function renderCarrito(){
+  const cont = document.getElementById('cartItems');
+  if(!usuarioActual){
+    cont.innerHTML = '<p class="cart-empty">Iniciá sesión para ver tu carrito.</p>';
+    document.getElementById('cartTotal').textContent = formatearPrecio(0);
+    return;
+  }
+  const items = carritos[usuarioActual.id_usuario];
+  if(items.length === 0){
+    cont.innerHTML = '<p class="cart-empty">Tu carrito está vacío. Todavía no agregaste nada del catálogo.</p>';
+    document.getElementById('cartTotal').textContent = formatearPrecio(0);
+    return;
+  }
+  let total = 0;
+  cont.innerHTML = items.map(item=>{
+    const p = productos.find(pp=>pp.id_producto===item.id_producto);
+    const subtotal = p.precio * item.cantidad;
+    total += subtotal;
+    return `
+    <div class="cart-item" data-id="${item.id_producto}" data-talle="${item.talle}">
+      <div class="ci-icon"><img src="${p.imagen}" alt=""></div>
+      <div class="ci-info">
+        <div class="ci-nombre">${p.nombre_producto}</div>
+        <div class="ci-meta">Talle ${item.talle} · SKU ${p.sku}</div>
+        <div class="ci-controls">
+          <button class="qty-btn" data-accion="restar">−</button>
+          <span class="ci-qty">${item.cantidad}</span>
+          <button class="qty-btn" data-accion="sumar">+</button>
+          <button class="ci-quitar" data-accion="quitar">Quitar</button>
+        </div>
+      </div>
+      <div class="ci-precio">${formatearPrecio(subtotal)}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('cartTotal').textContent = formatearPrecio(total);
+}
+
+document.getElementById('cartItems').addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-accion]');
+  if(!btn || !usuarioActual) return;
+  const fila = btn.closest('.cart-item');
+  const idProducto = Number(fila.dataset.id);
+  const talle = fila.dataset.talle;
+  const carrito = carritos[usuarioActual.id_usuario];
+  const idx = carrito.findIndex(i=>i.id_producto===idProducto && i.talle===talle);
+  if(idx === -1) return;
+
+  if(btn.dataset.accion === 'sumar'){ carrito[idx].cantidad++; }
+  if(btn.dataset.accion === 'restar'){ carrito[idx].cantidad--; if(carrito[idx].cantidad<=0) carrito.splice(idx,1); }
+  if(btn.dataset.accion === 'quitar'){ carrito.splice(idx,1); }
+
+  renderCarrito();
+  actualizarBadgeCarrito();
+});
+
+document.getElementById('btnFinalizar').addEventListener('click', ()=>{
+  if(!usuarioActual || carritos[usuarioActual.id_usuario].length===0) return;
+  carritos[usuarioActual.id_usuario] = [];
+  renderCarrito();
+  actualizarBadgeCarrito();
+  cerrarCarrito();
+  mostrarToast('¡Pedido confirmado! (simulación académica, sin pasarela de pago real)');
+});
+
+/* ============ TOAST ============ */
+let toastTimeout;
+function mostrarToast(texto, advertencia){
+  const t = document.getElementById('toast');
+  clearTimeout(toastTimeout);
+  t.textContent = texto;
+  t.classList.toggle('warn', !!advertencia);
+  t.classList.add('visible');
+  toastTimeout = setTimeout(()=> t.classList.remove('visible'), 3200);
+}
+
+/* ============ MENÚ MÓVIL ============ */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mainNav = document.getElementById('mainNav');
+hamburgerBtn.addEventListener('click', ()=>{
+  const abierto = mainNav.classList.toggle('abierto');
+  hamburgerBtn.setAttribute('aria-expanded', abierto);
+});
+mainNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mainNav.classList.remove('abierto')));
+
+/* ============ INICIALIZACIÓN ============ */
+renderProductos();
+actualizarAuthUI();
+</script>
+</body>
+</html>
+
